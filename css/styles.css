@@ -193,6 +193,7 @@ ul {
 .hero-image {
   position: absolute;
   inset: 0;
+  animation: heroFadeIn 1.2s ease both;
 }
 
 .hero-image img {
@@ -220,6 +221,7 @@ ul {
   color: #fff;
   padding: 0 24px 80px;
   max-width: 800px;
+  animation: heroContentFadeIn 1s ease 0.4s both;
 }
 
 .hero-content h1 {
@@ -744,18 +746,6 @@ ul {
 }
 
 /* --- Animations --- */
-
-/* Hero fade-in on page load */
-.hero-image {
-  opacity: 0;
-  animation: heroFadeIn 1.2s ease forwards;
-}
-
-.hero-content {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: heroContentFadeIn 1s ease 0.4s forwards;
-}
 
 @keyframes heroFadeIn {
   from { opacity: 0; }
