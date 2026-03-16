@@ -10,6 +10,7 @@ export default function HeroSection() {
   const headlineRef = useRef<HTMLDivElement>(null);
   const subheadlineRef = useRef<HTMLParagraphElement>(null);
   const captionRef = useRef<HTMLDivElement>(null);
+  const heroImageSrc = `${import.meta.env.BASE_URL}images/hero-family.jpg`;
 
   // Load animation
   useEffect(() => {
@@ -127,7 +128,7 @@ export default function HeroSection() {
       {/* Background Image */}
       <img
         ref={bgRef}
-        src="/images/hero-family.jpg"
+        src={heroImageSrc}
         alt="Family with drone equipment"
         className="bg-image"
         style={{ objectPosition: '55% 50%' }}

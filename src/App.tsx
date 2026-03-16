@@ -10,6 +10,8 @@ import './App.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const baseImagePath = `${import.meta.env.BASE_URL}images/`;
+
 const sections = [
   {
     id: 'shoreline',
@@ -17,7 +19,7 @@ const sections = [
     subheadline: 'Crisp, natural edits that keep the coast looking like the coast.',
     cta: '',
     caption: 'LICENSED PART 107 PILOT | INSURED',
-    image: '/images/beach-shoreline.jpg',
+    image: `${baseImagePath}beach-shoreline.jpg`,
     ctaAction: () => {},
   },
   {
@@ -26,7 +28,7 @@ const sections = [
     subheadline: 'Fast turnaround, cinematic tours, and angles that sell.',
     cta: 'Request a Quote',
     caption: 'TWILIGHT, INTERIORS, GROUNDS',
-    image: '/images/neighborhood-aerial.jpg',
+    image: `${baseImagePath}neighborhood-aerial.jpg`,
     ctaAction: () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }),
   },
   {
@@ -35,7 +37,7 @@ const sections = [
     subheadline: 'Inspections, progress docs, and marketing footage, delivered clean.',
     cta: '',
     caption: 'CONSTRUCTION, MARINE, EVENTS',
-    image: '/images/harbor-approach.jpg',
+    image: `${baseImagePath}harbor-approach.jpg`,
     ctaAction: () => {},
   },
   {
@@ -44,7 +46,7 @@ const sections = [
     subheadline: 'Color-graded, sound-designed, and built to hold attention.',
     cta: '',
     caption: '4K / 60FPS, HDR DELIVERY',
-    image: '/images/bridge-sweep.jpg',
+    image: `${baseImagePath}bridge-sweep.jpg`,
     endOffset: '+=140%',
     ctaAction: () => {},
   },
@@ -54,7 +56,7 @@ const sections = [
     subheadline: 'From setup to sunset, every moment, every angle.',
     cta: 'Plan Your Shoot',
     caption: 'WEDDINGS, CORPORATE, FESTIVALS',
-    image: '/images/city-harbor.jpg',
+    image: `${baseImagePath}city-harbor.jpg`,
     ctaAction: () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }),
   },
   {
@@ -63,7 +65,7 @@ const sections = [
     subheadline: 'Tight coordination, safe flight plans, and stunning results.',
     cta: '',
     caption: 'PERMITS, LAANC, NIGHT WAIVERS',
-    image: '/images/downtown-flythrough.jpg',
+    image: `${baseImagePath}downtown-flythrough.jpg`,
     ctaAction: () => {},
   },
   {
@@ -72,7 +74,7 @@ const sections = [
     subheadline: 'Tell me what you\'re building. I\'ll bring the sky.',
     cta: 'Book Me',
     caption: 'TURNAROUND: 48 TO 72 HOURS',
-    image: '/images/city-to-coast.jpg',
+    image: `${baseImagePath}city-to-coast.jpg`,
     ctaAction: () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }),
   },
 ];
