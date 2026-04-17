@@ -131,7 +131,7 @@ export default function HeroSection() {
         src={heroImageSrc}
         alt="Family with drone equipment"
         className="bg-image"
-        style={{ objectPosition: '55% 50%' }}
+        style={{ objectPosition: '55% 25%' }}
       />
 
       {/* Dark overlay for text readability */}
