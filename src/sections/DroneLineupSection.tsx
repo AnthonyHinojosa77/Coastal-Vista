@@ -1,7 +1,7 @@
 import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Camera, Plane, Zap } from 'lucide-react';
+import { Camera, Plane, Zap, Orbit } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -40,6 +40,18 @@ const drones = [
       'Action sports coverage',
       'Immersive fly-throughs',
       'High-speed cinematic shots',
+    ],
+  },
+  {
+    name: 'DJI Avata 360',
+    icon: Orbit,
+    tagline: 'The Immersive 360° Rig',
+    specs: ['5.7K 360° Capture', 'Invisible Gimbal', 'Reframe in Post'],
+    useCases: [
+      '360° virtual property tours',
+      'VR and XR experiences',
+      'Single-take reframable shots',
+      'Event and venue flythroughs',
     ],
   },
 ];
@@ -116,7 +128,7 @@ export default function DroneLineupSection() {
         </div>
 
         {/* Drone Cards */}
-        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {drones.map((drone, index) => {
             const Icon = drone.icon;
             return (

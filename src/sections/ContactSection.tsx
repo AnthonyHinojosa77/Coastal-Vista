@@ -170,10 +170,10 @@ export default function ContactSection() {
                 <div>
                   <p className="caption-mono text-[#6B7280] mb-1">EMAIL</p>
                   <a
-                    href="mailto:tonytonejosa.ah@gmail.com"
+                    href="mailto:anthonymhinojosa@gmail.com"
                     className="text-[#0B0F17] hover:text-[#3F8EFC] transition-colors"
                   >
-                    tonytonejosa.ah@gmail.com
+                    anthonymhinojosa@gmail.com
                   </a>
                 </div>
               </div>
@@ -194,7 +194,11 @@ export default function ContactSection() {
             className="bg-white border border-[rgba(11,15,23,0.08)] p-8 md:p-10"
           >
             {submitted ? (
-              <div className="h-full flex flex-col items-center justify-center text-center py-12">
+              <div
+                role="status"
+                aria-live="polite"
+                className="h-full flex flex-col items-center justify-center text-center py-12"
+              >
                 <div className="w-16 h-16 bg-[#3F8EFC]/10 rounded-full flex items-center justify-center mb-6">
                   <Send className="w-8 h-8 text-[#3F8EFC]" />
                 </div>
@@ -293,7 +297,9 @@ export default function ContactSection() {
                 </button>
 
                 {submitError && (
-                  <p className="text-sm text-[#B91C1C]">{submitError}</p>
+                  <p role="alert" className="text-sm text-[#B91C1C]">
+                    {submitError}
+                  </p>
                 )}
               </form>
             )}
@@ -306,7 +312,7 @@ export default function ContactSection() {
         <div className="max-w-[1400px] mx-auto px-[6vw]">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="font-mono text-xs text-[#6B7280]">
-              © 2026 COASTAL VISTA. ALL RIGHTS RESERVED.
+              © {new Date().getFullYear()} COASTAL VISTA. ALL RIGHTS RESERVED.
             </p>
             <p className="font-mono text-xs text-[#6B7280]">
               FAA PART 107 LICENSED & INSURED

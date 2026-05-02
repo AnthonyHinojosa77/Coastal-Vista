@@ -130,8 +130,7 @@ export default function HeroSection() {
         ref={bgRef}
         src={heroImageSrc}
         alt="Family with drone equipment"
-        className="bg-image"
-        style={{ objectPosition: '55% 50%' }}
+        className="bg-image hero-bg-img"
       />
 
       {/* Dark overlay for text readability */}
