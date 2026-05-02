@@ -19,6 +19,22 @@ html {
   will-change: transform;
 }
 
+/* Hero background: default (used as-is on small screens) */
+.hero-bg-img {
+  object-position: 55% 50%;
+}
+
+/* On wider screens the headline is huge, so anchor the image to the top
+   and let it overflow downward. This pushes the subjects into the lower
+   third of the viewport, well below the headline. */
+@media (min-width: 768px) {
+  .hero-bg-img {
+    height: 175%;
+    bottom: auto;
+    object-position: 55% 0%;
+  }
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .headline-xl {

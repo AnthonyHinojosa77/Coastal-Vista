@@ -130,8 +130,7 @@ export default function HeroSection() {
         ref={bgRef}
         src={heroImageSrc}
         alt="Family with drone equipment"
-        className="bg-image"
-        style={{ objectPosition: '55% 50%' }}
+        className="bg-image hero-bg-img"
       />
 
       {/* Dark overlay for text readability */}
@@ -142,7 +141,7 @@ export default function HeroSection() {
         {/* Headline */}
         <div
           ref={headlineRef}
-          className="absolute left-[6vw] top-[8vh] w-[60vw]"
+          className="absolute left-[6vw] top-[14vh] w-[60vw]"
         >
           <h1 className="headline-hero text-white">
             <span className="headline-line block">COASTAL</span>
