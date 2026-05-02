@@ -29,7 +29,7 @@ html {
    third of the viewport, well below the headline. */
 @media (min-width: 768px) {
   .hero-bg-img {
-    height: 175%;
+    height: 140%;
     bottom: auto;
     object-position: 55% 0%;
   }
