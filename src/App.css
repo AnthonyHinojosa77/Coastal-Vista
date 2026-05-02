@@ -21,7 +21,7 @@ html {
 
 /* Hero background: default (used as-is on small screens) */
 .hero-bg-img {
-  object-position: 55% 50%;
+  object-position: 38% 50%;
 }
 
 /* On wider screens the headline is huge, so anchor the image to the top
