@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
@@ -34,12 +34,16 @@ export default function PinnedSection({
   const subheadlineRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLButtonElement>(null);
   const captionRef = useRef<HTMLDivElement>(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
     const ctx = gsap.context(() => {
+      // Respect reduced-motion: skip the pinned parallax/scroll timeline entirely.
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
       const scrollTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -145,12 +149,15 @@ export default function PinnedSection({
       className="section-pinned"
       style={{ zIndex }}
     >
-      {/* Background Image */}
+      {/* Background Image (below the fold: lazy + blur-up placeholder) */}
       <img
         ref={bgRef}
         src={image}
         alt={headline.join(' ')}
-        className="bg-image"
+        loading="lazy"
+        decoding="async"
+        onLoad={() => setImageLoaded(true)}
+        className={`bg-image img-blur-up${imageLoaded ? ' is-loaded' : ''}`}
       />
 
       {/* Dark overlay for text readability */}
