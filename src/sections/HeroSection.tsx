@@ -14,7 +14,17 @@ export default function HeroSection() {
 
   // Load animation
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    // Skip entrance animation for users who prefer reduced motion.
+    mm.add('(prefers-reduced-motion: reduce)', () => {
+      gsap.set(
+        [bgRef.current, headlineRef.current, subheadlineRef.current, captionRef.current],
+        { clearProps: 'all' }
+      );
+    });
+
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
       // Background fade in
@@ -50,9 +60,9 @@ export default function HeroSection() {
         { x: 0, opacity: 1, duration: 0.6 },
         '-=0.5'
       );
-    }, sectionRef);
+    });
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   // Scroll animation
@@ -61,6 +71,9 @@ export default function HeroSection() {
     if (!section) return;
 
     const ctx = gsap.context(() => {
+      // Respect reduced-motion: skip the pinned parallax/scroll timeline entirely.
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
       const scrollTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -131,6 +144,9 @@ export default function HeroSection() {
         src={heroImageSrc}
         alt="Family with drone equipment"
         className="bg-image hero-bg-img"
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
       />
 
       {/* Dark overlay for text readability */}

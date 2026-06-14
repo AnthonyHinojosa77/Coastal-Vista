@@ -29,6 +29,9 @@ export default function ContactSection() {
     if (!section) return;
 
     const ctx = gsap.context(() => {
+      // Respect reduced-motion: leave columns/details in their final visible state.
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
       // Left column animation
       gsap.fromTo(
         leftColRef.current,

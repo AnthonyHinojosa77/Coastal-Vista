@@ -107,6 +107,22 @@
   object-fit: cover;
 }
 
+/*
+ * Blur-up placeholder for lazy-loaded gallery images.
+ * Starts blurred over a neutral coastal-toned background, then clears
+ * once the image fires onLoad (adds .is-loaded). Only `filter` is animated
+ * here so it never conflicts with the GSAP opacity/transform timelines.
+ */
+.img-blur-up {
+  background-color: #0b0f17;
+  filter: blur(16px);
+  transition: filter 0.5s ease;
+}
+
+.img-blur-up.is-loaded {
+  filter: blur(0);
+}
+
 /* Grain overlay */
 .grain-overlay {
   position: fixed;

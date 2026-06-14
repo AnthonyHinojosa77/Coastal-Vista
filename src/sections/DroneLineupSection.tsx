@@ -66,6 +66,9 @@ export default function DroneLineupSection() {
     if (!section) return;
 
     const ctx = gsap.context(() => {
+      // Respect reduced-motion: leave title/cards in their final visible state.
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
       // Title animation
       gsap.fromTo(
         titleRef.current,
