@@ -1,56 +1,51 @@
-/* App-specific styles */
-
-/* Ensure smooth scrolling behavior */
-html {
-  scroll-behavior: auto;
+/* Photo-led layout with scroll-linked fades and pinned transitions. */
+:root { --cv-ink: #0b0f17; --cv-paper: #f4f6f8; --cv-border: #ffffff30; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+body { background: var(--cv-ink); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid #3f8efc; outline-offset: 5px; }
+.skip-link { position: fixed; top: -80px; left: 16px; z-index: 200; background: white; padding: 12px; }
+.skip-link:focus { top: 12px; }
+.site-nav { position: sticky; top: 0; z-index: 110; display: flex; justify-content: space-between; align-items: center; gap: 20px; min-height: 68px; padding: 12px 4vw; background: var(--cv-ink); color: var(--cv-paper); }
+.site-logo { font-weight: 800; font-size: 14px; letter-spacing: -.02em; }
+.site-links { display: flex; align-items: center; gap: clamp(16px, 3vw, 40px); font-size: 12px; }
+.site-links a { padding: 8px 0; }
+.site-links .nav-contact { border: 1px solid var(--cv-border); padding: 10px 16px; }
+.site-links a:hover { color: #b9d4ed; }
+.photo-panel { height: 90svh; min-height: 600px; max-height: 1100px; position: relative; overflow: hidden; border-bottom: 2px solid var(--cv-ink); color: var(--cv-paper); }
+.photo-panel picture, .photo-panel img, .photo-shade { position: absolute; inset: 0; width: 100%; height: 100%; }
+.photo-panel img { object-fit: cover; }
+.photo-shade { background: linear-gradient(0deg, #0009, transparent 72%); }
+.photo-copy { position: absolute; left: 5vw; bottom: 7vh; max-width: 90%; }
+.photo-caption { margin: 0 0 20px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+.photo-copy h1, .photo-copy h2 { font-family: 'Sora', Arial, sans-serif; font-size: clamp(44px, 7vw, 112px); font-weight: 800; line-height: .92; letter-spacing: -.055em; margin: 0; }
+.photo-copy h1 span, .photo-copy h2 span { display: block; }
+.photo-description { margin: 24px 0 0; max-width: 440px; font-size: 15px; line-height: 1.6; text-shadow: 0 1px 8px #000; }
+.photo-cta { display: inline-flex; align-items: center; gap: 32px; padding: 13px 18px; margin-top: 24px; background: var(--cv-paper); color: var(--cv-ink); font-size: 13px; font-weight: 600; }
+.photo-cta:hover { background: #dce7ee; }
+.family-intro { position: relative; min-height: 760px; height: 85svh; overflow: hidden; color: var(--cv-paper); }
+.family-intro-image, .family-intro-shade { position: absolute; inset: 0; width: 100%; height: 100%; }
+.family-intro-image { object-fit: cover; object-position: 43% top; }
+.family-intro-shade { background: linear-gradient(180deg, #000c, #0005 34%, transparent 60%); }
+.family-intro-copy { position: relative; padding: 48px 5vw; max-width: 690px; }
+.family-intro-copy h2 { font-family: 'Sora', Arial, sans-serif; font-size: clamp(32px, 3.2vw, 48px); font-weight: 800; line-height: 1.02; letter-spacing: -.04em; text-transform: uppercase; margin: 0 0 20px; }
+.family-intro-copy p { font-size: 16px; line-height: 1.6; max-width: 400px; }
+.family-signoff { margin: 24px 0 30px; color: #535d69; font-size: 15px; line-height: 1.6; }
+.family-signoff strong { color: var(--cv-ink); }
+.family-signoff p { margin-top: 8px; }
+.contact-section a[href^="mailto:"] { overflow-wrap: anywhere; }
+@media (max-width: 640px) {
+  .site-nav { gap: 12px; min-height: 64px; }
+  .site-logo { font-size: 12px; }
+  .site-links { gap: 12px; }
+  .site-links a[href="#realestate"], .site-links a[href="#equipment"] { display: none; }
+  .site-links .nav-contact { padding: 9px 12px; }
+  .photo-panel { height: 84svh; min-height: 560px; }
+  .photo-copy { bottom: 40px; }
+  .photo-copy h1, .photo-copy h2 { font-size: clamp(38px, 10.5vw, 62px); }
+  .photo-caption { font-size: 10px; max-width: 270px; line-height: 1.6; }
+  .photo-description { font-size: 14px; max-width: 300px; }
+  .family-intro { min-height: 650px; }
+  .family-intro-copy { padding: 26px; }
+  .family-intro-copy h2 { font-size: 34px; }
 }
-
-/* Pin spacer fix for GSAP */
-.pin-spacer {
-  pointer-events: none !important;
-}
-
-.pin-spacer > * {
-  pointer-events: auto !important;
-}
-
-/* Ensure sections stack properly */
-.section-pinned {
-  will-change: transform;
-}
-
-/* Hero background: default (used as-is on small screens) */
-.hero-bg-img {
-  object-position: 38% 50%;
-}
-
-/* On wider screens the headline is huge, so anchor the image to the top
-   and let it overflow downward. This pushes the subjects into the lower
-   third of the viewport, well below the headline. */
-@media (min-width: 768px) {
-  .hero-bg-img {
-    height: 140%;
-    bottom: auto;
-    object-position: 55% 0%;
-  }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .headline-xl {
-    font-size: clamp(40px, 10vw, 56px) !important;
-  }
-  
-  .headline-lg {
-    font-size: clamp(32px, 8vw, 44px) !important;
-  }
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }

@@ -1,15 +1,24 @@
-import { useRef, useLayoutEffect, useState } from 'react';
+import { useState, useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 import { Mail, MapPin, Send } from 'lucide-react';
 
-gsap.registerPlugin(ScrollTrigger);
 
 export default function ContactSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const leftColRef = useRef<HTMLDivElement>(null);
-  const formCardRef = useRef<HTMLDivElement>(null);
-  const detailsRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  useLayoutEffect(() => {
+    const mm = gsap.matchMedia();
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      const section = sectionRef.current;
+      if (!section) return;
+      for (const target of section.querySelectorAll('.family-intro-copy, .contact-form-card, .contact-details')) {
+        gsap.fromTo(target, { y: 36, opacity: 0 }, { y: 0, opacity: 1, ease: 'none',
+          scrollTrigger: { trigger: target, start: 'top 95%', end: 'top 65%', scrub: .5 } });
+      }
+    }, sectionRef);
+    return () => mm.revert();
+  }, []);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -23,77 +32,6 @@ export default function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const formspreeEndpoint = (import.meta.env.VITE_FORMSPREE_ENDPOINT as string | undefined)?.trim();
-
-  useLayoutEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const ctx = gsap.context(() => {
-      // Respect reduced-motion: leave columns/details in their final visible state.
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-      // Left column animation
-      gsap.fromTo(
-        leftColRef.current,
-        { x: '-6vw', opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 80%',
-            end: 'top 40%',
-            scrub: 0.5,
-          },
-        }
-      );
-
-      // Form card animation
-      gsap.fromTo(
-        formCardRef.current,
-        { x: '6vw', opacity: 0, scale: 0.98 },
-        {
-          x: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.8,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 80%',
-            end: 'top 40%',
-            scrub: 0.5,
-          },
-        }
-      );
-
-      // Contact details stagger
-      const detailItems = detailsRef.current?.querySelectorAll('.detail-item');
-      if (detailItems) {
-        gsap.fromTo(
-          detailItems,
-          { y: 16, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            stagger: 0.08,
-            duration: 0.5,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: section,
-              start: 'top 70%',
-              end: 'top 40%',
-              scrub: 0.5,
-            },
-          }
-        );
-      }
-    }, section);
-
-    return () => ctx.revert();
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -134,7 +72,7 @@ export default function ContactSection() {
         timeline: '',
         message: '',
       });
-      setTimeout(() => setSubmitted(false), 3000);
+
     } catch {
       setSubmitError('Unable to send your inquiry right now. Please try again or use the email link.');
     } finally {
@@ -152,22 +90,29 @@ export default function ContactSection() {
     <section
       ref={sectionRef}
       id="contact"
-      className="relative bg-[#F4F6F8] min-h-screen py-[10vh]"
+      className="contact-section relative bg-[#F4F6F8] pb-[10vh]"
       style={{ zIndex: 100 }}
     >
+            <div className="family-intro">
+              <img className="family-intro-image" src={`${import.meta.env.BASE_URL}images/hero-family.jpg`} alt="Anthony and his family enjoying a day out with the drone" loading="lazy" decoding="async" />
+              <div className="family-intro-shade" />
+              <div className="family-intro-copy">
+                <h2>Let’s make something worth sharing.</h2>
+                <p>Share a few details and I'll reply with availability, pricing, and next steps.</p>
+              </div>
+            </div>
+
       <div className="max-w-[1400px] mx-auto px-[6vw]">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 pt-[8vh]">
           {/* Left Column - Content */}
-          <div ref={leftColRef} className="pt-8">
-            <h2 className="headline-lg text-[#0B0F17] mb-6">
-              Let's make something iconic.
-            </h2>
-            <p className="text-[#6B7280] text-lg leading-relaxed mb-12 max-w-md">
-              Share a few details and I'll reply with availability, pricing, and next steps.
-            </p>
+          <div>
+            <div className="family-signoff">
+              <strong>Thanks for stopping by.</strong>
+              <p>I’m Anthony, the person behind Coastal Vista. I’d love to hear what you have in mind.</p>
+            </div>
 
             {/* Contact Details */}
-            <div ref={detailsRef} className="space-y-6 mb-12">
+            <div className="contact-details space-y-6 mb-12">
               <div className="detail-item flex items-start gap-4">
                 <Mail className="w-5 h-5 text-[#3F8EFC] mt-0.5" />
                 <div>
@@ -193,8 +138,7 @@ export default function ContactSection() {
 
           {/* Right Column - Form */}
           <div
-            ref={formCardRef}
-            className="bg-white border border-[rgba(11,15,23,0.08)] p-8 md:p-10"
+            className="contact-form-card self-start bg-white border border-[rgba(11,15,23,0.08)] p-8 md:p-10"
           >
             {submitted ? (
               <div
@@ -209,15 +153,16 @@ export default function ContactSection() {
                   Message Sent!
                 </h3>
                 <p className="text-[#6B7280]">
-                  Thanks for reaching out. I'll get back to you within 24 hours.
+                  Thanks for reaching out. I’ll be in touch about your project.
                 </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label className="form-label">Name</label>
+                  <label htmlFor="contact-name" className="form-label">Name</label>
                   <input
                     type="text"
+                    id="contact-name"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
@@ -228,9 +173,10 @@ export default function ContactSection() {
                 </div>
 
                 <div>
-                  <label className="form-label">Email</label>
+                  <label htmlFor="contact-email" className="form-label">Email</label>
                   <input
                     type="email"
+                    id="contact-email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
@@ -242,9 +188,10 @@ export default function ContactSection() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="form-label">Project Type</label>
+                    <label htmlFor="contact-projectType" className="form-label">Project Type</label>
                     <select
-                      name="projectType"
+                      id="contact-projectType"
+                    name="projectType"
                       value={formData.projectType}
                       onChange={handleChange}
                       className="form-input"
@@ -260,9 +207,10 @@ export default function ContactSection() {
                   </div>
 
                   <div>
-                    <label className="form-label">Timeline</label>
+                    <label htmlFor="contact-timeline" className="form-label">Timeline</label>
                     <select
-                      name="timeline"
+                      id="contact-timeline"
+                    name="timeline"
                       value={formData.timeline}
                       onChange={handleChange}
                       className="form-input"
@@ -278,8 +226,9 @@ export default function ContactSection() {
                 </div>
 
                 <div>
-                  <label className="form-label">Message</label>
+                  <label htmlFor="contact-message" className="form-label">Message</label>
                   <textarea
+                    id="contact-message"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
