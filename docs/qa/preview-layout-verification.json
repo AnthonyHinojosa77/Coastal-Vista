@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:5174",
+  "at": "2026-09-19T19:08:25.256Z",
+  "checks": [
+    {
+      "name": "Homepage and on-demand video loading",
+      "status": "pass"
+    },
+    {
+      "name": "Emblem loads at bottom right",
+      "status": "pass"
+    },
+    {
+      "name": "Contact form handles service errors and successful responses (simulated)",
+      "status": "pass"
+    },
+    {
+      "name": "1440px: layout, viewer navigation, reduced motion, WCAG automated audit",
+      "status": "pass"
+    },
+    {
+      "name": "768px: layout, viewer navigation, reduced motion, WCAG automated audit",
+      "status": "pass"
+    },
+    {
+      "name": "375px: layout, viewer navigation, reduced motion, WCAG automated audit",
+      "status": "pass"
+    },
+    {
+      "name": "No uncaught JavaScript errors or failed HTTP resources",
+      "status": "pass"
+    }
+  ],
+  "errors": [],
+  "status": "pass"
+}

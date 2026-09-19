@@ -116,7 +116,7 @@ export default function ContactSection() {
               <div className="detail-item flex items-start gap-4">
                 <Mail className="w-5 h-5 text-[#3F8EFC] mt-0.5" />
                 <div>
-                  <p className="caption-mono text-[#6B7280] mb-1">EMAIL</p>
+                  <p className="caption-mono text-[#535D69] mb-1">EMAIL</p>
                   <a
                     href="mailto:coastalvista@alchemistlabs.cloud"
                     className="text-[#0B0F17] hover:text-[#3F8EFC] transition-colors"
@@ -129,7 +129,7 @@ export default function ContactSection() {
               <div className="detail-item flex items-start gap-4">
                 <MapPin className="w-5 h-5 text-[#3F8EFC] mt-0.5" />
                 <div>
-                  <p className="caption-mono text-[#6B7280] mb-1">LOCATION</p>
+                  <p className="caption-mono text-[#535D69] mb-1">LOCATION</p>
                   <p className="text-[#0B0F17]">Corpus Christi, TX — willing to travel</p>
                 </div>
               </div>
@@ -152,7 +152,7 @@ export default function ContactSection() {
                 <h3 className="text-2xl font-display font-bold text-[#0B0F17] mb-3">
                   Message Sent!
                 </h3>
-                <p className="text-[#6B7280]">
+                <p className="text-[#535D69]">
                   Thanks for reaching out. I’ll be in touch about your project.
                 </p>
               </div>
@@ -259,14 +259,18 @@ export default function ContactSection() {
         </div>
       </div>
 
+      <div className="max-w-[1400px] mx-auto px-[6vw] contact-emblem">
+        <img src={`${import.meta.env.BASE_URL}images/brand/coastal-vista-emblem.webp`} alt="Coastal Vista Drone Media" width="640" height="633" loading="lazy" decoding="async" />
+      </div>
+
       {/* Footer */}
       <footer className="mt-20 pt-8 border-t border-[rgba(11,15,23,0.08)]">
         <div className="max-w-[1400px] mx-auto px-[6vw]">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="font-mono text-xs text-[#6B7280]">
+            <p className="font-mono text-xs text-[#535D69]">
               © {new Date().getFullYear()} COASTAL VISTA. ALL RIGHTS RESERVED.
             </p>
-            <p className="font-mono text-xs text-[#6B7280]">
+            <p className="font-mono text-xs text-[#535D69]">
               FAA PART 107 LICENSED & INSURED
             </p>
           </div>

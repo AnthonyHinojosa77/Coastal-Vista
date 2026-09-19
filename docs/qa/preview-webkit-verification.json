@@ -1,0 +1,15 @@
+{
+  "url": "http://127.0.0.1:5174",
+  "engine": "WebKit",
+  "device": "iPhone 13 emulation",
+  "checks": [
+    "Phone layout, photo filter and dialog navigation",
+    "Video playback: Golden-hour Harbor Bridge",
+    "Video playback: North Beach shoreline",
+    "Video playback: Blue-lit Harbor Bridge",
+    "Video playback: Sports field under lights",
+    "Video playback: Warm sky over the city",
+    "Video playback: Pool & outdoor living film"
+  ],
+  "status": "pass"
+}

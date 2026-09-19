@@ -1,0 +1,68 @@
+[
+  {
+    "id": "V079",
+    "duration": 8.008,
+    "bytes": 5161418,
+    "stream": {
+      "width": 1920,
+      "height": 1080,
+      "r_frame_rate": "60000/1001"
+    },
+    "decode": "pass"
+  },
+  {
+    "id": "V010",
+    "duration": 6.006,
+    "bytes": 5916539,
+    "stream": {
+      "width": 1920,
+      "height": 1080,
+      "r_frame_rate": "30000/1001"
+    },
+    "decode": "pass"
+  },
+  {
+    "id": "V015",
+    "duration": 4.004,
+    "bytes": 2201435,
+    "stream": {
+      "width": 1920,
+      "height": 1080,
+      "r_frame_rate": "60000/1001"
+    },
+    "decode": "pass"
+  },
+  {
+    "id": "V072",
+    "duration": 8.008,
+    "bytes": 6485186,
+    "stream": {
+      "width": 1920,
+      "height": 1080,
+      "r_frame_rate": "30000/1001"
+    },
+    "decode": "pass"
+  },
+  {
+    "id": "V063",
+    "duration": 7.991317,
+    "bytes": 5726102,
+    "stream": {
+      "width": 1920,
+      "height": 1080,
+      "r_frame_rate": "60000/1001"
+    },
+    "decode": "pass"
+  },
+  {
+    "id": "V048",
+    "duration": 30.0,
+    "bytes": 18654597,
+    "stream": {
+      "width": 1920,
+      "height": 908,
+      "r_frame_rate": "30/1"
+    },
+    "decode": "pass"
+  }
+]

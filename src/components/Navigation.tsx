@@ -19,7 +19,7 @@ export default function Navigation() {
     <nav className="site-nav" aria-label="Main navigation">
       <a onClick={navigate} className="site-logo" href="#home">COASTAL VISTA</a>
       <div className="site-links">
-        <a onClick={navigate} href="#work">Work</a>
+        <a onClick={navigate} href="#portfolio">Work</a>
         <a onClick={navigate} href="#realestate">Services</a>
         <a onClick={navigate} href="#equipment">Equipment</a>
         <a onClick={navigate} className="nav-contact" href="#contact">Let’s talk <span aria-hidden="true">↗</span></a>

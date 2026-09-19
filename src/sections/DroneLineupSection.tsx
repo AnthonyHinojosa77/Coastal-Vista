@@ -166,7 +166,7 @@ export default function DroneLineupSection() {
 
                 {/* Use Cases */}
                 <div>
-                  <p className="caption-mono text-white/40 mb-4">BEST FOR</p>
+                  <p className="caption-mono text-white/60 mb-4">BEST FOR</p>
                   <ul className="space-y-3">
                     {drone.useCases.map((useCase, i) => (
                       <li key={i} className="flex items-start gap-3 text-white/80 text-sm">
@@ -183,7 +183,7 @@ export default function DroneLineupSection() {
 
         {/* Bottom Note */}
         <div className="mt-16 text-center">
-          <p className="text-white/40 text-sm">
+          <p className="text-white/60 text-sm">
             All equipment FAA Part 107 compliant and fully insured for commercial operations.
           </p>
         </div>

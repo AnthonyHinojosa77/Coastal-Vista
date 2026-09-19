@@ -2,6 +2,7 @@ import PhotoPanel from './components/PhotoPanel';
 import Navigation from './components/Navigation';
 import ContactSection from './sections/ContactSection';
 import DroneLineupSection from './sections/DroneLineupSection';
+import PortfolioSection from './sections/PortfolioSection';
 import './App.css';
 
 const photographs = [
@@ -20,6 +21,7 @@ export default function App() {
       <Navigation />
       <main id="main">
         {photographs.map((photo, index) => <PhotoPanel key={photo.id} photo={photo} index={index} />)}
+        <PortfolioSection />
         <DroneLineupSection />
         <ContactSection />
       </main>
