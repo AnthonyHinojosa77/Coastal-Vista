@@ -1,6 +1,6 @@
 # Coastal Vista portfolio release
 
-The existing six-photo homepage, family contact introduction, and scroll-linked text transitions are retained. Work in the main navigation opens a separate page at `/gallery.html` with 14 photographs and six silent films. Filters switch between all work, photos, and videos. Full images and films open in a keyboard-accessible dialog. Full video files are requested only after opening a film; smaller muted previews load and play as their cards enter view.
+The existing six-photo homepage, family contact introduction, and scroll-linked text transitions are retained. Gallery in the main navigation opens a separate page at `/gallery.html` with 14 photographs and six silent films. Filters switch between all work, photos, and videos. Full images and films open in a keyboard-accessible dialog. Full video files are requested only after opening a film; smaller muted previews load and play as their cards enter view.
 
 The emblem has moved from the contact area to the upper left of the opening photograph. It fades in independently on arrival, fades out while scrolling away, and fades back in on upward scroll. It remains visible without animation when reduced motion is requested.
 

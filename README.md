@@ -43,7 +43,7 @@ Navigation links between the homepage sections and the standalone gallery. Photo
 
 ## Portfolio
 
-The Work link opens `gallery.html`, a separate, filterable library of 14 photographs and six films. Images open at full size and full films load on demand in a native dialog. Muted inline previews load and play when at least 55% of a video card is in view. They pause offscreen or behind the viewer and stop after 10 seconds, or at the end of a shorter clip. A preview toggle lets visitors pause them; reduced-motion visitors start with previews disabled. Browsers that block autoplay retain the poster and the full-film viewer.
+The Gallery link opens `gallery.html`, a separate, filterable library of 14 photographs and six films. Images open at full size and full films load on demand in a native dialog. Muted inline previews load and play when at least 55% of a video card is in view. They pause offscreen or behind the viewer and stop after 10 seconds, or at the end of a shorter clip. A preview toggle lets visitors pause them; reduced-motion visitors start with previews disabled. Browsers that block autoplay retain the poster and the full-film viewer.
 
 Vite builds both `index.html` and `gallery.html`, so direct gallery visits and refreshes work on GitHub Pages without a routing fallback. Web files live in `public/portfolio/`; the original media is kept separately in OneDrive.
 

@@ -22,7 +22,7 @@ try {
  const returned = await page.locator('.hero-emblem').evaluate(el => +getComputedStyle(el).opacity);
  if (!(away < .05 && returned > .99)) throw new Error(`Phone emblem fades: ${away}, ${returned}`);
  report.checks.push('Hero emblem loads, fades out and returns on upward scroll');
- await page.getByRole('link', { name: 'Work', exact: true }).click();
+ await page.getByRole('link', { name: 'Gallery', exact: true }).click();
  await expect(page).toHaveURL(new URL('gallery.html', url.endsWith('/') ? url : `${url}/`).href);
  const response = await page.reload({ waitUntil: 'networkidle' });
  if (response.status() !== 200) throw new Error('Gallery reload failed');

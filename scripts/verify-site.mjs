@@ -55,7 +55,7 @@ try {
   if (!(opacities[0]<.4 && opacities[1]>.95 && opacities[2]<.4 && opacities[3]>.95)) throw new Error(`${id} fades ${opacities}`);
   check(`${id}: original scroll fades retained`,opacities);
  }
- await page.getByRole('link',{name:'Work',exact:true}).click();
+ await page.getByRole('link',{name:'Gallery',exact:true}).click();
  await expect(page).toHaveURL(gallery);
  await expect(page.locator('h1')).toHaveText('Photo & filmgallery.');
  await expect(page.locator('.photo-panel, .contact-section')).toHaveCount(0);
