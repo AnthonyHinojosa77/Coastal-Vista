@@ -50,12 +50,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
 
-/* The portfolio extends the photo-led page, with files loaded only on demand. */
+/* Standalone portfolio with full media loaded on demand and small scroll previews. */
 .portfolio-section { position: relative; background: var(--cv-ink); color: var(--cv-paper); padding: 112px 5vw 64px; }
 .portfolio-shell { max-width: 1400px; margin: auto; }
 .portfolio-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; margin-bottom: 56px; }
 .portfolio-eyebrow { font-family: 'IBM Plex Mono', monospace; color: #abc4d5; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 24px; }
-.portfolio-heading h2 { font-family: 'Sora', sans-serif; font-size: clamp(38px, 5vw, 72px); line-height: 1.05; letter-spacing: -.045em; font-weight: 600; }
+.portfolio-heading h1 { font-family: 'Sora', sans-serif; font-size: clamp(38px, 5vw, 72px); line-height: 1.05; letter-spacing: -.045em; font-weight: 600; }
 .portfolio-heading > p { max-width: 350px; color: #b8c2cf; line-height: 1.7; font-size: 15px; }
 .portfolio-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 0; border-top: 1px solid var(--cv-border); margin-bottom: 16px; }
 .portfolio-filters { display: flex; gap: 8px; }
@@ -87,8 +87,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .viewer-caption p { margin-top: 8px; font-size: 13px; color: #b8c2cf; }
 .viewer-navigation { display: flex; gap: 8px; flex-shrink: 0; }
 .viewer-error { color: #ffc2b8; padding-top: 16px; }
-.contact-emblem { display: flex; justify-content: flex-end; margin-top: 48px; }
-.contact-emblem img { width: clamp(150px, 17vw, 230px); height: auto; }
+
 @media (max-width: 800px) {
   .portfolio-heading { display: block; }
   .portfolio-heading > p { margin-top: 24px; }
@@ -111,3 +110,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 .form-input::placeholder { color: #626c79; opacity: 1; }
 .form-input:focus-visible { outline: 2px solid #3f8efc; outline-offset: 3px; }
+
+.hero-emblem { position: absolute; top: clamp(24px, 4vh, 48px); left: 5vw; width: clamp(104px, min(14vw, 20svh), 190px); }
+.photo-panel .hero-emblem img { position: static; inset: auto; display: block; width: 100%; height: auto; object-fit: contain; }
+.site-links a[aria-current="page"] { color: #b9d4ed; border-bottom: 1px solid currentColor; }
+.portfolio-preview { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.preview-toggle { margin-left: auto; min-height: 44px; padding: 10px 14px; border: 1px solid var(--cv-border); font-size: 12px; color: #c1ccd7; }
+.portfolio-preview-note { margin: 0 0 28px; font-size: 13px; color: #b8c2cf; line-height: 1.6; }
+.gallery-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; padding: 24px 0 0; color: #b8c2cf; font-size: 12px; }
+.gallery-footer a { text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 640px) {
+  .site-links .nav-services, .site-links .nav-equipment { display: none; }
+  .hero-emblem { width: 104px; top: 22px; }
+  .preview-toggle { margin-left: 0; }
+  .portfolio-toolbar { flex-wrap: wrap; justify-content: flex-start; }
+}

@@ -6,6 +6,7 @@ import { defineConfig } from "vite"
 export default defineConfig({
   base: './',
   plugins: [react()],
+  build: { rollupOptions: { input: { home: path.resolve(__dirname, 'index.html'), gallery: path.resolve(__dirname, 'gallery.html') } } },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

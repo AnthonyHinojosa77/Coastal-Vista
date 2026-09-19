@@ -1,6 +1,8 @@
 # Coastal Vista portfolio release
 
-The existing six-photo homepage, family contact introduction, and scroll-linked text transitions are retained. Work in the main navigation now opens a portfolio with 14 photographs and six silent films. Filters switch between all work, photos, and videos. Full images and films open in a keyboard-accessible dialog; video files are requested only after opening a film.
+The existing six-photo homepage, family contact introduction, and scroll-linked text transitions are retained. Work in the main navigation opens a separate page at `/gallery.html` with 14 photographs and six silent films. Filters switch between all work, photos, and videos. Full images and films open in a keyboard-accessible dialog. Full video files are requested only after opening a film; smaller muted previews load and play as their cards enter view.
+
+The emblem has moved from the contact area to the upper left of the opening photograph. It fades in independently on arrival, fades out while scrolling away, and fades back in on upward scroll. It remains visible without animation when reduced motion is requested.
 
 ## Media decisions
 
@@ -18,13 +20,19 @@ The existing six-photo homepage, family contact introduction, and scroll-linked 
 
 The source media and Lightroom working copies remain preserved in OneDrive. Web exports contain no generated scenery. Video audio is intentionally absent in this portfolio set. The emblem uses the supplied transparent artwork, resized for web use, and also provides the favicon.
 
+## Preview behavior
+
+Preview exports are H.264, 960 pixels wide, 30 fps, silent, and no longer than 10 seconds. The pool film has a 10-second preview; the other approved clips are four to eight seconds long and play to their existing end. The full approved film remains available in the viewer. Previews stop offscreen, when the browser tab is hidden, and while the viewer is open. A pause/enable control is provided. Reduced-motion visitors start with autoplay disabled; failed autoplay leaves the poster and manual viewer available. See `qa/preview-media-checks.json` for export durations and sizes.
+
 ## Validation
 
 - `npm run lint`
 - `npm run build`
 - `npm run qa` against a running development or preview server
-- `QA_URL=https://coastal-vista.com QA_OUTPUT=/tmp/cv-live-qa npm run qa` after deployment
+- `npm run qa:webkit`
+- `QA_URL=https://coastal-vista.com QA_OUTPUT=/tmp/cv-gallery-live-qa npm run qa` after deployment
+- `QA_URL=https://coastal-vista.com QA_OUTPUT=/tmp/cv-gallery-live-qa npm run qa:webkit` after deployment
 
-The browser check covers all image viewers, complete playback of all six videos, filters, dialog keyboard behavior, responsive layouts, reduced motion, automated accessibility rules, and the actual entrance/exit/return opacity of the five scrolling photo panels after the opening scene. Contact success/error handling is simulated in the repeatable test, so repeated runs do not send inquiries. One separately labeled live inquiry checks the real delivery path.
+The browser check covers all image viewers, playback of all six full films, filters, dialog keyboard behavior, responsive layouts, reduced motion, automated accessibility rules, direct gallery reloads, cross-page contact navigation, and actual entrance/exit/return opacity of the emblem and five scrolling photo panels after the opening scene. Preview checks verify muted inline playback, offscreen/modal pausing, the toggle, and the 10-second stop. Complete full-film playback was verified in the initial portfolio release; those full-film files are unchanged. Contact success/error handling is simulated in the repeatable test, so repeated runs do not send inquiries. Anthony confirmed receipt of the separately labeled live Formspree test inquiry on September 19, 2026.
 
-Automated accessibility tests supplement visual review; they do not certify every assistive technology. Desktop Chrome with phone/tablet viewport sizes is used for reproducible layout checks. A second WebKit pass uses iPhone emulation to check photo viewing, all six video formats, and the emblem. It is run with `npm run qa:webkit` after `npx playwright install webkit`.
+Automated accessibility tests supplement visual review; they do not certify every assistive technology. Desktop Chrome with phone/tablet viewport sizes is used for reproducible layout checks. A second WebKit pass uses iPhone emulation to check photo viewing, all six video formats, preview playback, emblem fades, and cross-page navigation. It is run with `npm run qa:webkit` after `npx playwright install webkit`; this is browser emulation, not a physical iPhone test.

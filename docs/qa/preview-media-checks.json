@@ -1,0 +1,68 @@
+[
+  {
+    "id": "V010",
+    "path": "public/portfolio/previews/V010.mp4",
+    "codec": "h264",
+    "width": 960,
+    "height": 540,
+    "frameRate": "30/1",
+    "durationSeconds": 6.0,
+    "bytes": 1132963,
+    "audio": false
+  },
+  {
+    "id": "V015",
+    "path": "public/portfolio/previews/V015.mp4",
+    "codec": "h264",
+    "width": 960,
+    "height": 540,
+    "frameRate": "30/1",
+    "durationSeconds": 4.066016,
+    "bytes": 336112,
+    "audio": false
+  },
+  {
+    "id": "V048",
+    "path": "public/portfolio/previews/V048.mp4",
+    "codec": "h264",
+    "width": 960,
+    "height": 454,
+    "frameRate": "30/1",
+    "durationSeconds": 10.0,
+    "bytes": 1856483,
+    "audio": false
+  },
+  {
+    "id": "V063",
+    "path": "public/portfolio/previews/V063.mp4",
+    "codec": "h264",
+    "width": 960,
+    "height": 540,
+    "frameRate": "30/1",
+    "durationSeconds": 8.033333,
+    "bytes": 1043273,
+    "audio": false
+  },
+  {
+    "id": "V072",
+    "path": "public/portfolio/previews/V072.mp4",
+    "codec": "h264",
+    "width": 960,
+    "height": 540,
+    "frameRate": "30/1",
+    "durationSeconds": 8.0,
+    "bytes": 1674385,
+    "audio": false
+  },
+  {
+    "id": "V079",
+    "path": "public/portfolio/previews/V079.mp4",
+    "codec": "h264",
+    "width": 960,
+    "height": 540,
+    "frameRate": "30/1",
+    "durationSeconds": 8.066667,
+    "bytes": 712367,
+    "audio": false
+  }
+]

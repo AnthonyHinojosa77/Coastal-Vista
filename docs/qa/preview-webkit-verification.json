@@ -1,15 +1,19 @@
 {
   "url": "http://127.0.0.1:5174",
+  "at": "2026-09-19T19:27:11.685Z",
   "engine": "WebKit",
   "device": "iPhone 13 emulation",
   "checks": [
+    "Hero emblem loads, fades out and returns on upward scroll",
     "Phone layout, photo filter and dialog navigation",
+    "Muted inline previews play on scroll, pause offscreen, stop at 10 seconds",
     "Video playback: Golden-hour Harbor Bridge",
     "Video playback: North Beach shoreline",
     "Video playback: Blue-lit Harbor Bridge",
     "Video playback: Sports field under lights",
     "Video playback: Warm sky over the city",
-    "Video playback: Pool & outdoor living film"
+    "Video playback: Pool & outdoor living film",
+    "Gallery contact link returns to homepage contact section"
   ],
   "status": "pass"
 }

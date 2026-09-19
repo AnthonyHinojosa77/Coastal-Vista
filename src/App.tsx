@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { scrollToSection } from './lib/navigation';
 import PhotoPanel from './components/PhotoPanel';
 import Navigation from './components/Navigation';
 import ContactSection from './sections/ContactSection';
@@ -15,15 +18,27 @@ const photographs = [
 ];
 
 export default function App() {
+  const galleryPage = window.location.pathname.endsWith('/gallery.html');
+  useEffect(() => {
+    if (galleryPage || !window.location.hash) return;
+    let cancelled = false;
+    void document.fonts.ready.then(() => requestAnimationFrame(() => {
+      if (cancelled) return;
+      ScrollTrigger.refresh();
+      scrollToSection(window.location.hash.slice(1), 'instant');
+    }));
+    return () => { cancelled = true; };
+  }, [galleryPage]);
   return (
     <>
       <a className="skip-link" href="#main">Skip to content</a>
-      <Navigation />
+      <Navigation galleryPage={galleryPage} />
       <main id="main">
+        {galleryPage ? <PortfolioSection /> : <>
         {photographs.map((photo, index) => <PhotoPanel key={photo.id} photo={photo} index={index} />)}
-        <PortfolioSection />
         <DroneLineupSection />
         <ContactSection />
+        </>}
       </main>
     </>
   );

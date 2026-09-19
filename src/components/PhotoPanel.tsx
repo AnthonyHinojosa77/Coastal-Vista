@@ -31,6 +31,12 @@ export default function PhotoPanel({ photo, index }: { photo: Photo; index: numb
         gsap.fromTo(children, { y: 24, opacity: 0 },
           { y: 0, opacity: 1, stagger: .1, duration: .8, ease: 'power2.out' });
       }
+      if (index === 0) {
+        const emblem = section.querySelector('.hero-emblem');
+        gsap.fromTo(section.querySelector('.hero-emblem img'), { opacity: 0, y: 12 },
+          { opacity: 1, y: 0, duration: 1, delay: .15, ease: 'power2.out' });
+        timeline.to(emblem, { opacity: 0, y: -18, duration: .3, ease: 'none' }, .45);
+      }
       timeline.to(copy, { y: -24, opacity: 0, duration: .28, ease: 'none' }, .72);
     }, ref);
     return () => mm.revert();
@@ -44,6 +50,7 @@ export default function PhotoPanel({ photo, index }: { photo: Photo; index: numb
         <img src={`${import.meta.env.BASE_URL}images/real/desktop/${photo.image}.webp`} alt={photo.alt} loading={index === 0 ? 'eager' : 'lazy'} fetchPriority={index === 0 ? 'high' : 'auto'} decoding="async" width="1920" height="1080" />
       </picture>
       <div className="photo-shade" />
+      {index === 0 && <div className="hero-emblem"><img src={`${import.meta.env.BASE_URL}images/brand/coastal-vista-emblem.webp`} alt="Coastal Vista Drone Media" width="640" height="633" decoding="async" /></div>}
       <div className="photo-copy">
         <p className="photo-caption">{String(index + 1).padStart(2, '0')} / 06 — {photo.location}</p>
         <Heading id={`${photo.id}-title`}>{photo.title.map(line => <span key={line}>{line}</span>)}</Heading>

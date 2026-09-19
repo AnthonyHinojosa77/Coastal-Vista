@@ -1,9 +1,8 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import VideoPreview from '../components/VideoPreview';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight, ChevronLeft, ChevronRight, Play, X } from 'lucide-react';
 
-gsap.registerPlugin(ScrollTrigger);
 type Media = { id: string; title: string; description: string; type: 'photo' | 'video'; duration?: string };
 const photos: [string, string, string][] = [
   ['P045', 'Sunlit Harbor Bridge', 'Golden light across the bridge and working waterfront.'],
@@ -35,6 +34,7 @@ const asset = (path: string) => `${import.meta.env.BASE_URL}portfolio/${path}`;
 export default function PortfolioSection() {
   const [filter, setFilter] = useState<'all' | 'photo' | 'video'>('all');
   const [active, setActive] = useState<Media | null>(null);
+  const [previewsEnabled, setPreviewsEnabled] = useState(() => !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   const [mediaError, setMediaError] = useState(false);
   const section = useRef<HTMLElement>(null);
   const dialog = useRef<HTMLDialogElement>(null);
@@ -44,12 +44,16 @@ export default function PortfolioSection() {
   useLayoutEffect(() => {
     const mm = gsap.matchMedia();
     mm.add('(prefers-reduced-motion: no-preference)', () => {
-      gsap.fromTo('.portfolio-heading', { opacity: 0, y: 28 }, { opacity: 1, y: 0, ease: 'none',
-        scrollTrigger: { trigger: '.portfolio-heading', start: 'top 95%', end: 'top 70%', scrub: .5 } });
+      gsap.fromTo('.portfolio-heading', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: .6, ease: 'power2.out' });
     }, section);
     return () => mm.revert();
   }, []);
-  useLayoutEffect(() => { ScrollTrigger.refresh(); }, [filter]);
+  useEffect(() => {
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => { if (motion.matches) setPreviewsEnabled(false); };
+    motion.addEventListener('change', update);
+    return () => motion.removeEventListener('change', update);
+  }, []);
   useLayoutEffect(() => {
     if (!active) return;
     const element = dialog.current;
@@ -66,25 +70,29 @@ export default function PortfolioSection() {
     <section className="portfolio-section" id="portfolio" ref={section} aria-labelledby="portfolio-title">
       <div className="portfolio-shell">
         <header className="portfolio-heading">
-          <div><p className="portfolio-eyebrow">Coastal Vista / Selected work</p><h2 id="portfolio-title">A different<br />point of view.</h2></div>
+          <div><p className="portfolio-eyebrow">Coastal Vista / Selected work</p><h1 id="portfolio-title">Photo & film<br />gallery.</h1></div>
           <p>From the Texas coast to the details of a backyard retreat. Explore photographs and films captured from above.</p>
         </header>
         <div className="portfolio-toolbar">
           <div className="portfolio-filters" role="group" aria-label="Filter portfolio">
             {(['all', 'photo', 'video'] as const).map(type => <button key={type} type="button" aria-pressed={filter === type} onClick={() => setFilter(type)}>{type === 'all' ? 'All work' : type === 'photo' ? 'Photos' : 'Videos'}</button>)}
           </div>
+          <button className="preview-toggle" type="button" aria-pressed={previewsEnabled} onClick={() => setPreviewsEnabled(value => !value)}>{previewsEnabled ? 'Pause previews' : 'Enable previews'}</button>
           <p className="portfolio-count" role="status">{visible.length} {filter === 'photo' ? 'photographs' : filter === 'video' ? 'films' : 'perspectives'}</p>
         </div>
+        <p className="portfolio-preview-note">Films preview silently as you browse, for up to 10 seconds. Open any photograph or film for a closer look.</p>
         <div className="portfolio-grid">
           {visible.map((item, index) => <button type="button" key={item.id} className={`portfolio-card${index === 0 ? ' portfolio-featured' : ''}`} onClick={() => open(item)} aria-label={`${item.type === 'video' ? 'Play' : 'View'} ${item.title}`}>
             <span className="portfolio-image">
-              <img src={asset(item.type === 'photo' ? `thumbs/${item.id}.webp` : `posters/${item.id}.webp`)} srcSet={item.type === 'photo' ? `${asset(`thumbs/${item.id}.webp`)} 1x, ${asset(`photos/${item.id}.webp`)} 2x` : undefined} alt="" loading="lazy" decoding="async" width="720" height="480" />
+              {item.type === 'photo' ? <img src={asset(`thumbs/${item.id}.webp`)} srcSet={`${asset(`thumbs/${item.id}.webp`)} 1x, ${asset(`photos/${item.id}.webp`)} 2x`} alt="" loading="lazy" decoding="async" width="720" height="480" />
+                : <VideoPreview id={item.id} poster={asset(`posters/${item.id}.webp`)} enabled={previewsEnabled && !active} />}
               {item.type === 'video' && <span className="portfolio-play"><Play size={22} fill="currentColor" aria-hidden="true" /><span>{item.duration}</span></span>}
             </span>
             <span className="portfolio-card-caption"><span>{item.title}</span><ArrowUpRight size={18} aria-hidden="true" /></span>
           </button>)}
         </div>
-        <div className="portfolio-signoff"><p>Have a place or a project in mind?</p><a href="#contact">Let’s plan your shoot <ArrowUpRight size={18} aria-hidden="true" /></a></div>
+        <div className="portfolio-signoff"><p>Have a place or a project in mind?</p><a href="./#contact">Let’s plan your shoot <ArrowUpRight size={18} aria-hidden="true" /></a></div>
+        <footer className="gallery-footer"><a href="./">Back to Coastal Vista</a><span>© {new Date().getFullYear()} Coastal Vista</span></footer>
       </div>
       {active && <dialog ref={dialog} className="portfolio-dialog" aria-labelledby="media-title" aria-describedby="media-description" onCancel={() => setActive(null)} onClick={event => { if (event.target === event.currentTarget) setActive(null); }} onKeyDown={event => {
         if (active.type === 'photo' && event.key === 'ArrowRight') { event.preventDefault(); step(1); }

@@ -259,10 +259,6 @@ export default function ContactSection() {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-[6vw] contact-emblem">
-        <img src={`${import.meta.env.BASE_URL}images/brand/coastal-vista-emblem.webp`} alt="Coastal Vista Drone Media" width="640" height="633" loading="lazy" decoding="async" />
-      </div>
-
       {/* Footer */}
       <footer className="mt-20 pt-8 border-t border-[rgba(11,15,23,0.08)]">
         <div className="max-w-[1400px] mx-auto px-[6vw]">

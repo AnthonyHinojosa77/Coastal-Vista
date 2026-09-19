@@ -1,16 +1,31 @@
 import { webkit, devices, expect } from '@playwright/test';
 import fs from 'node:fs';
 const url = process.env.QA_URL || 'http://127.0.0.1:5174';
-const out = process.env.QA_OUTPUT || '/tmp/cv-mvp-qa';
+const out = process.env.QA_OUTPUT || '/tmp/cv-gallery-qa';
 fs.mkdirSync(out, { recursive: true });
 const browser = await webkit.launch();
-const report = { url, engine: 'WebKit', device: 'iPhone 13 emulation', checks: [] };
+const report = { url, at: new Date().toISOString(), engine: 'WebKit', device: 'iPhone 13 emulation', checks: [] };
 try {
  const page = await browser.newPage({ ...devices['iPhone 13'] });
  const errors = [];
  page.on('pageerror', e => errors.push(e.message));
  await page.goto(url, { waitUntil: 'networkidle' });
+ await page.waitForTimeout(1300);
+ await page.locator('.hero-emblem img').evaluate(im => im.decode());
+ await expect(page.locator('.contact-emblem, .portfolio-section')).toHaveCount(0);
+ await page.screenshot({ path: `${out}/webkit-phone-home.png` });
+ await page.evaluate(() => scrollTo({ top: innerHeight * .9, behavior: 'instant' }));
+ await page.waitForTimeout(900);
+ const away = await page.locator('.hero-emblem').evaluate(el => +getComputedStyle(el).opacity);
+ await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
+ await page.waitForTimeout(900);
+ const returned = await page.locator('.hero-emblem').evaluate(el => +getComputedStyle(el).opacity);
+ if (!(away < .05 && returned > .99)) throw new Error(`Phone emblem fades: ${away}, ${returned}`);
+ report.checks.push('Hero emblem loads, fades out and returns on upward scroll');
  await page.getByRole('link', { name: 'Work', exact: true }).click();
+ await expect(page).toHaveURL(new URL('gallery.html', url.endsWith('/') ? url : `${url}/`).href);
+ const response = await page.reload({ waitUntil: 'networkidle' });
+ if (response.status() !== 200) throw new Error('Gallery reload failed');
  await page.waitForTimeout(1600);
  await expect(page.locator('.portfolio-card')).toHaveCount(20);
  await page.screenshot({ path: `${out}/webkit-phone-gallery.png` });
@@ -25,18 +40,32 @@ try {
  await page.getByRole('button', { name: 'Close media' }).click();
  report.checks.push('Phone layout, photo filter and dialog navigation');
  await page.getByRole('button', { name: 'Videos', exact: true }).click();
+ const first = page.locator('[data-preview-id="V063"]');
+ await first.scrollIntoViewIfNeeded();
+ await page.waitForFunction(() => document.querySelector('[data-preview-id="V063"]').currentTime > .5);
+ if (!await first.evaluate(v => v.muted && v.playsInline && !v.loop)) throw new Error('Phone preview playback attributes');
+ const pool = page.locator('[data-preview-id="V048"]');
+ await pool.scrollIntoViewIfNeeded();
+ await page.waitForFunction(() => document.querySelector('[data-preview-id="V048"]').currentTime > .5);
+ if (!await first.evaluate(v => v.paused)) throw new Error('Off-screen phone preview kept playing');
+ await page.waitForFunction(() => document.querySelector('[data-preview-id="V048"]').ended, null, { timeout: 15000 });
+ if (!await pool.evaluate(v => v.paused && Math.abs(v.duration - 10) < .1)) throw new Error('Phone preview did not stop at 10 seconds');
+ report.checks.push('Muted inline previews play on scroll, pause offscreen, stop at 10 seconds');
  for(let i=0;i<6;i++) {
   await page.locator('.portfolio-card').nth(i).click();
-  await page.locator('video').evaluate(async v => { v.muted = true; await v.play(); });
-  await page.waitForFunction(() => document.querySelector('video')?.currentTime > .5);
+  await page.waitForFunction(() => [...document.querySelectorAll('.portfolio-preview')].every(v => v.paused));
+  await page.locator('.viewer-media video').evaluate(async v => { v.muted = true; await v.play(); });
+  await page.waitForFunction(() => document.querySelector('.viewer-media video')?.currentTime > .5);
   report.checks.push(`Video playback: ${await page.locator('#media-title').textContent()}`);
   if(i===0) await page.screenshot({ path: `${out}/webkit-phone-video.png` });
   await page.getByRole('button', { name: 'Close media' }).click();
  }
- await page.locator('.contact-emblem').scrollIntoViewIfNeeded();
- await page.waitForFunction(() => document.querySelector('.contact-emblem img')?.naturalWidth > 0);
- await page.screenshot({ path: `${out}/webkit-phone-footer.png` });
+ await page.getByRole('link', { name: 'Let’s talk', exact: false }).first().click();
+ await page.waitForTimeout(1000);
+ const contactY = await page.locator('#contact').evaluate(el => el.getBoundingClientRect().top);
+ if (Math.abs(contactY - 76) > 100) throw new Error(`Phone contact link position ${contactY}`);
+ report.checks.push('Gallery contact link returns to homepage contact section');
  if(errors.length) throw new Error(errors.join('\n'));
- report.status = 'pass'; console.log('PASS WebKit iPhone layout, photo viewer, all six video formats, emblem, no JS errors');
+ report.status = 'pass'; console.log('PASS WebKit iPhone layout, standalone gallery, photo viewer, all six films, scroll previews, emblem fades, no JS errors');
 } catch(error) { report.status = 'fail';report.error = error.stack;console.error(error);process.exitCode=1; }
 finally { fs.writeFileSync(`${out}/webkit-verification.json`,JSON.stringify(report,null,2)); await browser.close(); }

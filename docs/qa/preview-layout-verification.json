@@ -1,13 +1,83 @@
 {
   "url": "http://127.0.0.1:5174",
-  "at": "2026-09-19T19:08:25.256Z",
+  "at": "2026-09-19T19:28:25.178Z",
   "checks": [
     {
-      "name": "Homepage and on-demand video loading",
+      "name": "Emblem fades in on arrival and return; no footer emblem or gallery on homepage",
+      "status": "pass",
+      "detail": {
+        "away": 0,
+        "returned": 1
+      }
+    },
+    {
+      "name": "work: original scroll fades retained",
+      "status": "pass",
+      "detail": [
+        0.1071,
+        1,
+        0.1071,
+        1
+      ]
+    },
+    {
+      "name": "realestate: original scroll fades retained",
+      "status": "pass",
+      "detail": [
+        0.1071,
+        1,
+        0.1071,
+        1
+      ]
+    },
+    {
+      "name": "commercial: original scroll fades retained",
+      "status": "pass",
+      "detail": [
+        0.1071,
+        1,
+        0.1071,
+        1
+      ]
+    },
+    {
+      "name": "city: original scroll fades retained",
+      "status": "pass",
+      "detail": [
+        0.1071,
+        1,
+        0.1071,
+        1
+      ]
+    },
+    {
+      "name": "after-dark: original scroll fades retained",
+      "status": "pass",
+      "detail": [
+        0.1071,
+        1,
+        0.1071,
+        1
+      ]
+    },
+    {
+      "name": "Standalone gallery navigation and direct page reload",
       "status": "pass"
     },
     {
-      "name": "Emblem loads at bottom right",
+      "name": "All 14 photographs open; keyboard focus and Escape work",
+      "status": "pass"
+    },
+    {
+      "name": "Muted previews start in view, pause offscreen/in viewer, respect toggle, and stop at 10 seconds",
+      "status": "pass"
+    },
+    {
+      "name": "All six full films still play in the inspection viewer",
+      "status": "pass"
+    },
+    {
+      "name": "Gallery contact link returns to the correct homepage section",
       "status": "pass"
     },
     {
@@ -15,20 +85,28 @@
       "status": "pass"
     },
     {
-      "name": "1440px: layout, viewer navigation, reduced motion, WCAG automated audit",
+      "name": "1440px: both pages, accessibility, emblem spacing, reduced-motion preview opt-out",
       "status": "pass"
     },
     {
-      "name": "768px: layout, viewer navigation, reduced motion, WCAG automated audit",
+      "name": "768px: both pages, accessibility, emblem spacing, reduced-motion preview opt-out",
       "status": "pass"
     },
     {
-      "name": "375px: layout, viewer navigation, reduced motion, WCAG automated audit",
+      "name": "375px: both pages, accessibility, emblem spacing, reduced-motion preview opt-out",
       "status": "pass"
     },
     {
-      "name": "No uncaught JavaScript errors or failed HTTP resources",
+      "name": "No JavaScript errors or failed resources",
       "status": "pass"
+    },
+    {
+      "name": "1440x600 short laptop viewport: emblem fits above headline with space",
+      "status": "pass",
+      "detail": {
+        "emblemBottom": 210.6875,
+        "textTop": 260.5625
+      }
     }
   ],
   "errors": [],
