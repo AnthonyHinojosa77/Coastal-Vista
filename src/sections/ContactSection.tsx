@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 import { Mail, MapPin, Send } from 'lucide-react';
+import SocialLinks from '../components/SocialLinks';
 
 
 export default function ContactSection() {
@@ -133,6 +134,7 @@ export default function ContactSection() {
                   <p className="text-[#0B0F17]">Corpus Christi, TX — willing to travel</p>
                 </div>
               </div>
+              <SocialLinks />
             </div>
           </div>
 

@@ -48,3 +48,7 @@ The Gallery link opens `gallery.html`, a separate, filterable library of 14 phot
 Vite builds both `index.html` and `gallery.html`, so direct gallery visits and refreshes work on GitHub Pages without a routing fallback. Web files live in `public/portfolio/`; the original media is kept separately in OneDrive.
 
 See `docs/portfolio-release.md` for the media selection and release checks. Run `npm run qa` and `npm run qa:webkit` with the production preview running at `http://127.0.0.1:5174`, or set `QA_URL` to another preview/live URL. The form regression check requires a build with `VITE_FORMSPREE_ENDPOINT` configured; it intercepts requests and sends no inquiry. Set `CHROME_PATH` if Chrome is installed elsewhere. Browser QA screenshots and JSON reports are saved to `QA_OUTPUT` (default `/tmp/cv-gallery-qa`).
+
+## Social profiles
+
+The homepage contact area and gallery footer share `src/components/SocialLinks.tsx`, with labeled Instagram and Facebook icons. Both links open the public Coastal Vista profiles in a new tab. Instagram is `https://www.instagram.com/coastalvistatx/`; Facebook is `https://www.facebook.com/profile.php?id=61578649832040`. Both profile identities were checked in Chrome on September 19, 2026.

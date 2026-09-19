@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import VideoPreview from '../components/VideoPreview';
+import SocialLinks from '../components/SocialLinks';
 import { gsap } from 'gsap';
 import { ArrowUpRight, ChevronLeft, ChevronRight, Play, X } from 'lucide-react';
 
@@ -92,7 +93,7 @@ export default function PortfolioSection() {
           </button>)}
         </div>
         <div className="portfolio-signoff"><p>Have a place or a project in mind?</p><a href="./#contact">Let’s plan your shoot <ArrowUpRight size={18} aria-hidden="true" /></a></div>
-        <footer className="gallery-footer"><a href="./">Back to Coastal Vista</a><span>© {new Date().getFullYear()} Coastal Vista</span></footer>
+        <footer className="gallery-footer"><a href="./">Back to Coastal Vista</a><SocialLinks /><span>© {new Date().getFullYear()} Coastal Vista</span></footer>
       </div>
       {active && <dialog ref={dialog} className="portfolio-dialog" aria-labelledby="media-title" aria-describedby="media-description" onCancel={() => setActive(null)} onClick={event => { if (event.target === event.currentTarget) setActive(null); }} onKeyDown={event => {
         if (active.type === 'photo' && event.key === 'ArrowRight') { event.preventDefault(); step(1); }
