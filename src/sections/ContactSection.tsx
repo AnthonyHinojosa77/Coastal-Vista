@@ -99,7 +99,7 @@ export default function ContactSection() {
               <div className="family-intro-shade" />
               <div className="family-intro-copy">
                 <h2>Let’s make something worth sharing.</h2>
-                <p>Share a few details and I'll reply with availability, pricing, and next steps.</p>
+                <p>Shoots are scheduled by appointment. Share a few details and I'll reply with availability, pricing, and next steps.</p>
               </div>
             </div>
 
