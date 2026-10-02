@@ -119,10 +119,10 @@ export default function ContactSection() {
                 <div>
                   <p className="caption-mono text-[#535D69] mb-1">EMAIL</p>
                   <a
-                    href="mailto:coastalvista@alchemistlabs.cloud"
+                    href="mailto:coastalvista@remavi.net"
                     className="text-[#0B0F17] hover:text-[#3F8EFC] transition-colors"
                   >
-                    coastalvista@alchemistlabs.cloud
+                    coastalvista@remavi.net
                   </a>
                 </div>
               </div>
