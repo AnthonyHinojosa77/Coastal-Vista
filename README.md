@@ -31,7 +31,7 @@ VITE_FORMSPREE_ENDPOINT=https://formspree.io/f/your_form_id
 
 GitHub Pages deployment is configured in `.github/workflows/deploy-pages.yml`.
 
-After merge to `main`, the workflow builds and deploys the site to:
+After a push to `main`, the workflow builds and deploys the site to:
 
 [coastal-vista.com](https://coastal-vista.com/), with the standalone gallery at [coastal-vista.com/gallery.html](https://coastal-vista.com/gallery.html).
 
